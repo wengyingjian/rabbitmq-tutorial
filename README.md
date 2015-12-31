@@ -8,4 +8,4 @@ helloworld:[Rabbitmq（一）－HelloWorld](http://wengyingjian.github.io/blog/2
   
 workqueues:[Rabbitmq（三）－Work queues](http://wengyingjian.github.io/blog/2015/12/30/rabbitmq-workqueues/)  
   
-  
+publishsubscribe:[Rabbitmq（四）－Publish/Subscribe](http://wengyingjian.github.io/blog/2015/12/31/rabbitmq-publish-subscribe/)  
