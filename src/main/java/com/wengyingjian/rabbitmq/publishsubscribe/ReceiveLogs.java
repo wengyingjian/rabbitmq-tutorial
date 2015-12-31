@@ -25,8 +25,11 @@ public class ReceiveLogs {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
+        // 声明一个名称为EXCHANGE_NAME，类型为fanout的交换机
         channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
+        // 然后自动获取该交换机中队列的名称
         String queueName = channel.queueDeclare().getQueue();
+        // 两者绑定
         channel.queueBind(queueName, EXCHANGE_NAME, "");
 
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");

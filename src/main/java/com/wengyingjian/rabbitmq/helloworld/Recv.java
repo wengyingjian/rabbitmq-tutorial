@@ -25,14 +25,15 @@ public class Recv {
     private final static String REMOTE_HOST = "121.42.32.99";
 
     public static void main(String[] argv) throws Exception {
+        // 建立通道
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(REMOTE_HOST);
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
+        // 声明队列，告诉rabbitmq我到时候要监听名称为QUEUE_NAME的队列
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-
+        // 回调函数，监听到消息了该怎么处理。
         Consumer consumer = new DefaultConsumer(channel) {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
@@ -40,6 +41,8 @@ public class Recv {
                 System.out.println(" [x] Received '" + message + "'");
             }
         };
+        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+        // 开始监听（开始等待消费）
         channel.basicConsume(QUEUE_NAME, true, consumer);
     }
 }
