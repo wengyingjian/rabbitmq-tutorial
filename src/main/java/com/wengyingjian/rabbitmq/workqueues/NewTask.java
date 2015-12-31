@@ -9,6 +9,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.MessageProperties;
 
 /**
+ * 生产者
  * 
  * @author <a href="mailto:wengyingjian@foxmail.com">翁英健</a>
  * @version 1.1 2015年12月30日
@@ -19,6 +20,9 @@ public class NewTask {
     private final static String REMOTE_HOST     = "121.42.32.99";
     private static final String TASK_QUEUE_NAME = "task_queue";
 
+    /**
+     * 需要发送的消息的内容可以通过命令行的argv输入
+     */
     public static void main(String[] argv) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(REMOTE_HOST);
@@ -26,9 +30,7 @@ public class NewTask {
         Channel channel = connection.createChannel();
 
         channel.queueDeclare(TASK_QUEUE_NAME, true, false, false, null);
-
         String message = getMessage(argv);
-
         channel.basicPublish("", TASK_QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes("UTF-8"));
         System.out.println(" [x] Sent '" + message + "'");
 

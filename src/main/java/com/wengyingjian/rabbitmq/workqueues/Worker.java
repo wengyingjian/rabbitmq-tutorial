@@ -14,6 +14,7 @@ import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
 
 /**
+ * 消费者
  * 
  * @author <a href="mailto:wengyingjian@foxmail.com">翁英健</a>
  * @version 1.1 2015年12月30日

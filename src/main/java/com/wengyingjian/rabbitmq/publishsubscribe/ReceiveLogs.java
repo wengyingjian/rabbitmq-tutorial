@@ -8,6 +8,7 @@ import com.rabbitmq.client.*;
 import java.io.IOException;
 
 /**
+ * 消费者
  * 
  * @author <a href="mailto:wengyingjian@foxmail.com">翁英健</a>
  * @version 1.1 2016年1月1日
@@ -16,7 +17,7 @@ import java.io.IOException;
 
 public class ReceiveLogs {
     private static final String EXCHANGE_NAME = "logs";
-    private final static String REMOTE_HOST     = "121.42.32.99";
+    private final static String REMOTE_HOST   = "121.42.32.99";
 
     public static void main(String[] argv) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();

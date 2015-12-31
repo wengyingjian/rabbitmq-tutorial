@@ -8,6 +8,7 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
 
 /**
+ * 生产者
  * 
  * @author <a href="mailto:wengyingjian@foxmail.com">翁英健</a>
  * @version 1.1 2016年1月1日
@@ -25,10 +26,10 @@ public class EmitLog {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
+        // 声明一个fanout类型的交换机。交换机必须要有名字。
         channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
-
         String message = getMessage(argv);
-
+        // 往指定名称的的交换机中发送消息。因为此处指定的交换机为“fanout”模式的，所以不需要指定（绑定）队列。
         channel.basicPublish(EXCHANGE_NAME, "", null, message.getBytes("UTF-8"));
         System.out.println(" [x] Sent '" + message + "'");
 
