@@ -10,4 +10,9 @@ workqueues:[Rabbitmq（三）－Work queues](http://wengyingjian.github.io/blog/
   
 publishsubscribe:[Rabbitmq（四）－Publish/Subscribe](http://wengyingjian.github.io/blog/2015/12/31/rabbitmq-publish-subscribe/)  
   
-routing:[Rabbitmq（五）－Routing](http://wengyingjian.github.io/blog/2016/01/01/rabbitmq-routing/)
+routing:[Rabbitmq（五）－Routing](http://wengyingjian.github.io/blog/2016/01/01/rabbitmq-routing/)  
+  
+topics:[Rabbitmq（六）－Topics](http://wengyingjian.github.io/2016/01/02/rabbitmq-topics/)  
+  
+rpc:[Rabbitmq（七）－RPC](http://wengyingjian.github.io/2016/01/02/rabbitmq-rpc/)  
+  
