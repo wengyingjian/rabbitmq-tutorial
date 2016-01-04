@@ -31,9 +31,12 @@ public class Worker {
         final Connection connection = factory.newConnection();
         final Channel channel = connection.createChannel();
 
-        channel.queueDeclare(TASK_QUEUE_NAME, true, false, false, null);
+        // durable=true,保证服务器如果异常消息能够会丢失。
+        boolean durable = true;
+        channel.queueDeclare(TASK_QUEUE_NAME, durable, false, false, null);
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-        // 此处设置该消费者一次最多从队列中取出一个消息
+        // 此处设置该消费者一次最多从队列中取出一个消息。
+        // 保证工作进程比较平均的分配任务
         channel.basicQos(1);
         final Consumer consumer = new DefaultConsumer(channel) {
             @Override
@@ -45,6 +48,8 @@ public class Worker {
                     doWork(message);
                 } finally {
                     System.out.println(" [x] Done");
+                    // 默认情况下消息是需要ack回复的，以确保所有消息的执行
+                    // 如果忘记回复，则可能造成消息一直发送，无法删除，造成各种问题。
                     channel.basicAck(envelope.getDeliveryTag(), false);
                 }
             }

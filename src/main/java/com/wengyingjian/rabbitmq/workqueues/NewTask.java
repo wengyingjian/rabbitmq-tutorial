@@ -29,7 +29,9 @@ public class NewTask {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
-        channel.queueDeclare(TASK_QUEUE_NAME, true, false, false, null);
+        // durable=true,保证服务器如果异常消息能够会丢失。
+        boolean durable = true;
+        channel.queueDeclare(TASK_QUEUE_NAME, durable, false, false, null);
         String message = getMessage(argv);
         channel.basicPublish("", TASK_QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes("UTF-8"));
         System.out.println(" [x] Sent '" + message + "'");
