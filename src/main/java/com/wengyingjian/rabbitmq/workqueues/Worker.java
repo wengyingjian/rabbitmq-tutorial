@@ -48,13 +48,14 @@ public class Worker {
                     doWork(message);
                 } finally {
                     System.out.println(" [x] Done");
-                    // 默认情况下消息是需要ack回复的，以确保所有消息的执行
                     // 如果忘记回复，则可能造成消息一直发送，无法删除，造成各种问题。
                     channel.basicAck(envelope.getDeliveryTag(), false);
                 }
             }
         };
-        channel.basicConsume(TASK_QUEUE_NAME, false, consumer);
+        // 设置消息是需要ack回复的，以确保所有消息的执行
+        boolean autoAck = false;
+        channel.basicConsume(TASK_QUEUE_NAME, autoAck, consumer);
     }
 
     private static void doWork(String task) {
