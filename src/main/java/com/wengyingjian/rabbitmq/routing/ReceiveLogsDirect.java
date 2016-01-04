@@ -37,7 +37,8 @@ public class ReceiveLogsDirect {
             System.err.println("Usage: ReceiveLogsDirect [info] [warning] [error]");
             System.exit(1);
         }
-        // 一个channel绑定多个目标queue
+        // 在队列和交换机之间建立多个routingKey的绑定。
+        // 这样，当此处的routingKey的生产者处过来的routingKey对应上的时候，则可得到该消息。
         for (String severity : argv) {
             channel.queueBind(queueName, EXCHANGE_NAME, severity);
         }
